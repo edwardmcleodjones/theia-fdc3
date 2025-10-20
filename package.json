@@ -13,7 +13,7 @@
   },
   "engines": {
     "yarn": ">=1.7.0 <2",
-    "node": ">=20"
+    "node": ">=20 <21"
   },
   "devDependencies": {
     "@eclipse-dash/nodejs-wrapper": "^0.0.1",
@@ -39,6 +39,7 @@
     "clean": "lerna run clean && rimraf node_modules",
     "build": "yarn build:extensions && yarn build:applications",
     "build:dev": "yarn build:extensions && yarn build:applications:dev",
+    "build:dev:browser": "yarn build:extensions && yarn --cwd applications/browser build",
     "build:applications": "yarn build:extensions && lerna run --scope=\"theia-ide*app\" build:prod --concurrency 1",
     "build:applications:dev": "yarn build:extensions && lerna run --scope=\"theia-ide*app\" build --concurrency 1",
     "build:extensions": "lerna run --scope=\"theia-ide*ext\" build",
@@ -62,6 +63,12 @@
   },
   "theiaPluginsDir": "plugins",
   "theiaPlugins": {
+    "vscode.search-result": "https://open-vsx.org/api/vscode/search-result/1.95.3/file/vscode.search-result-1.95.3.vsix",
+    "vscode.simple-browser": "https://open-vsx.org/api/vscode/simple-browser/1.95.3/file/vscode.simple-browser-1.95.3.vsix",
+    "vscode.theme-monokai": "https://open-vsx.org/api/vscode/theme-monokai/1.95.3/file/vscode.theme-monokai-1.95.3.vsix",
+    "vscode.theme-defaults": "https://open-vsx.org/api/vscode/theme-defaults/1.95.3/file/vscode.theme-defaults-1.95.3.vsix"
+  },
+  "theiaPluginsExcluded": {
     "eclipse-theia.builtin-extension-pack": "https://open-vsx.org/api/eclipse-theia/builtin-extension-pack/1.95.3/file/eclipse-theia.builtin-extension-pack-1.95.3.vsix",
     "vscjava.vscode-java-pack": "https://open-vsx.org/api/vscjava/vscode-java-pack/0.29.0/file/vscjava.vscode-java-pack-0.29.0.vsix",
     "vscjava.vscode-java-dependency": "https://open-vsx.org/api/vscjava/vscode-java-dependency/0.24.1/file/vscjava.vscode-java-dependency-0.24.1.vsix"
@@ -85,6 +92,10 @@
     "**/nan": "2.23.0",
     "**/cpu-features": "0.0.9",
     "**/perfect-scrollbar": "1.5.5",
+    "**/node-abi": "^3.45.0"
+  },
+  "resolutions-disabled": {
+    "Note": "node-abi v4.14.0 requires Node 22.12.0+, but Electron (or at least node-pty) currently only builds with Node 20.x. Once Electron and node-pty support Node 22.x, we can upgrade this resolution. See: https://github.com/microsoft/node-pty/issues/793",
     "**/node-abi": "4.14.0"
   }
 }
