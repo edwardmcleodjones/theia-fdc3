@@ -23,7 +23,7 @@
     "target": "electron",
     "frontend": {
       "config": {
-        "applicationName": "Theia IDE",
+        "applicationName": "Theia FDC3",
         "reloadOnReconnect": true,
         "preferences": {
           "toolbar.showToolbar": true,
@@ -126,7 +126,14 @@
     "fs-extra": "^9.0.1",
     "theia-ide-launcher-ext": "1.65.100",
     "theia-ide-product-ext": "1.65.100",
-    "theia-ide-updater-ext": "1.65.100"
+    "theia-ide-updater-ext": "1.65.100",
+    "node-pty": "*",
+    "native-keymap": "*",
+    "find-git-repositories": "*",
+    "drivelist": "*",
+    "keytar": "*",
+    "ssh2": "*",
+    "cpu-features": "*"
   },
   "devDependencies": {
     "@theia/cli": "1.65.1",
