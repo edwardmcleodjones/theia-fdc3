@@ -133,7 +133,8 @@
     "drivelist": "*",
     "keytar": "*",
     "ssh2": "*",
-    "cpu-features": "*"
+    "cpu-features": "*",
+    "theia-fdc3-extension": "0.0.0"
   },
   "devDependencies": {
     "@theia/cli": "1.65.1",

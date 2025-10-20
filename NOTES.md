@@ -23,3 +23,10 @@ Try the instructions in the README.md first, in the `#build` section. If you run
   - In the Visual Studio Installer, choose "Modify" for your installed version of Visual Studio, go to the "Individual components" tab, and select `MSVC v143 - VS 2022 C++ x64/x86 Spectre-mitigated libs (Latest)`. Then click "Modify" to install the component. You should then be able to build Theia without the spectre-mitigation error.
 
 - Try downloading and installing the latest Windows SDK: https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/
+
+- If you get errors about `keytar`, e.g. a `theia-fdc3\node_modules\keytar\build\Release\keytar.node.js doesn't exist` error, try opening the NPM folder in a shell and running yarn install there, e.g.
+  ```
+  cd node_modules\keytar
+  yarn install
+  ```
+  This may happen if you're trying to just build the browser output without the electron app, as keytar is an optional dependency for electron only, and the browser app uses electron as a peer dependency.

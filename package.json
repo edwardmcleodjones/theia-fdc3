@@ -83,7 +83,12 @@
   ],
   "workspaces": [
     "applications/*",
-    "theia-extensions/*"
+    "theia-extensions/*",
+    "theia-fdc3-extension"
+  ],
+  "workspaces-disabled": [
+    "applications/browser",
+    "applications/electron"
   ],
   "resolutions": {
     "@types/puppeteer": "^5.4.0",
