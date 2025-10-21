@@ -31,7 +31,14 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- **Theia-Conformant Foundation**: Plan MUST deliver changes as plugins/extensions or document approved upstream modifications with rollback path.
+- **Context-First Workflow Model**: Plan MUST identify active business contexts, context selectors, and desktop-agent messaging impacts.
+- **FDC3-First Interoperability**: Plan MUST list intents/contexts touched, describe Desktop Agent contracts, and schedule conformance tests.
+- **Modular Extension Architecture**: Plan MUST specify extension boundaries, activation conditions, and cross-extension API versions.
+- **VS Code Extension Compatibility**: Plan MUST document any VSIX dependencies, compatibility checks, and required sandbox permissions or mitigations.
+- **Workspace UX & Productivity**: Plan MUST state how UI changes reinforce app launcher UX and avoid re-exposing default IDE widgets without approval.
+- **Enterprise Quality & Security**: Plan MUST enumerate automated tests, security considerations, and compliance evidence to be produced.
+- **Cross-Platform & Hybrid Delivery**: Plan MUST cover validation on Electron and browser targets with parity strategy and offline behavior.
 
 ## Project Structure
 
@@ -102,4 +109,3 @@ directories captured above]
 |-----------|------------|-------------------------------------|
 | [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
 | [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
-

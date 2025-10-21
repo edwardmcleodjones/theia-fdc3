@@ -95,6 +95,13 @@
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
+**Constitution Alignment Checklist** *(ensure every story covers these dimensions)*:
+- Identify business contexts involved and how context selectors behave (Context-First Workflow Model).
+- Enumerate FDC3 intents, contexts, and Desktop Agent contracts impacted.
+- Describe extension packaging, activation boundaries, and VS Code compatibility considerations.
+- Document cross-platform expectations (Electron vs. browser) and offline behavior.
+- Capture test strategy, security posture, and observability requirements that prove enterprise readiness.
+
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]
@@ -113,4 +120,3 @@
 - **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
 - **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
 - **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
-
