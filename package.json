@@ -84,7 +84,7 @@
   "workspaces": [
     "applications/*",
     "theia-extensions/*",
-    "theia-fdc3-extension"
+    "theia-fdc3-extensions/*"
   ],
   "workspaces-disabled": [
     "applications/browser",
