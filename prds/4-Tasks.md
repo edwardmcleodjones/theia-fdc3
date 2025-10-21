@@ -8,7 +8,7 @@ Below is a structured list of development tasks derived from the plan. These tas
     - Fork from Theia IDE. Configure the package.json/workspace to prepare for custom extensions (use the Theia Yo generator for a starting extension if needed).
     - Run the build scripts for both browser and Electron targets. Verify that you can run a stock Theia application in both modes.
     - **Output:** A baseline application that launches Theia with default features (we will remove/add features in subsequent steps).
-2.  **Create `theia-fdc3-extension`**: Set up a new Theia extension project to hold our FDC3-related code.
+2.  [x]**Create `theia-fdc3-extension` [Complete]**: Set up a new Theia extension project to hold our FDC3-related code.
     - Use the Theia extension generator in a separate folder, then copy the generated files to a new extension folder under `packages/` (e.g., `theia-fdc3-extension`).
     - Configure its package.json with necessary dependencies (e.g., `@theia/core`, `@theia/plugin`, etc.).
     - Set up basic scaffolding: an `index.ts` that registers the extension, and a simple command to verify it loads.
