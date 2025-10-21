@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: Theia FDC3 Desktop Agent (Documentation Contract)
+  version: 0.1.0
+  description: >-
+    Documentation-only OpenAPI describing control-plane interactions for Desktop Agent
+    and Workspace management. Not necessarily exposed as HTTP in MVP; models the
+    contracts for cross-extension APIs and test harnesses.
+servers:
+  - url: https://local-docs.invalid
+paths:
+  /workspaces:
+    get:
+      summary: List workspaces
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workspace'
+    post:
+      summary: Create workspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required: [name]
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+  /workspaces/{id}:
+    get:
+      summary: Get workspace
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+  /agent/broadcast:
+    post:
+      summary: Broadcast FDC3 context within workspace channel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                workspaceId: { type: string }
+                context: { $ref: '#/components/schemas/Context' }
+              required: [workspaceId, context]
+      responses:
+        '202': { description: Accepted }
+  /agent/raiseIntent:
+    post:
+      summary: Raise an FDC3 intent with context
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                intent: { type: string }
+                context: { $ref: '#/components/schemas/Context' }
+                workspaceId: { type: string }
+              required: [intent, workspaceId]
+      responses:
+        '200':
+          description: Resolution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntentResolution'
+        '404': { description: No handler }
+  /apps:
+    get:
+      summary: List installed apps
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/App'
+  /notifications:
+    get:
+      summary: List notifications
+      parameters:
+        - in: query
+          name: workspaceId
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+components:
+  schemas:
+    Workspace:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        channelId: { type: string }
+    Context:
+      type: object
+      properties:
+        type: { type: string }
+        payload: { type: object }
+      required: [type]
+    IntentResolution:
+      type: object
+      properties:
+        intent: { type: string }
+        chosenAppId: { type: string }
+        outcome: { type: string }
+        timestamp: { type: string, format: date-time }
+    App:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        icon: { type: string }
+        capabilities:
+          type: object
+          properties:
+            intents:
+              type: array
+              items: { type: string }
+            contexts:
+              type: array
+              items: { type: string }
+    Notification:
+      type: object
+      properties:
+        id: { type: string }
+        level: { type: string, enum: [info, warn, error] }
+        message: { type: string }
+        originAppId: { type: string }
+        workspaceId: { type: string }
+        timestamp: { type: string, format: date-time }
