@@ -9,6 +9,8 @@ import { ReactWidget } from "@theia/core/lib/browser/widgets/react-widget";
 import { MessageService } from "@theia/core";
 import { Message } from "@theia/core/lib/browser";
 
+import { Card } from "@/browser/components/ui/card";
+
 @injectable()
 export class ClientPickerWidgetWidget extends ReactWidget {
   static readonly ID = "client-picker-widget:widget";
@@ -37,9 +39,11 @@ export class ClientPickerWidgetWidget extends ReactWidget {
     return (
       <div id="widget-container">
         <AlertMessage type="INFO" header={header} />
-        <div className="bg-blue-500 text-white p-4 rounded-lg shadow-md">
-          Tailwind Test
-        </div>
+        <Card className="p-6">
+          <div className="bg-blue-500 text-white p-4 rounded-lg shadow-md">
+            Tailwind Test
+          </div>
+        </Card>
         <button
           id="displayMessageButton"
           className="theia-button secondary"
