@@ -1,10 +1,12 @@
-import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import { libInjectCss } from "vite-plugin-lib-inject-css";
 
 export default defineConfig({
   clearScreen: false,
-  plugins: [react()],
+  plugins: [react(), tailwindcss(), libInjectCss()],
   build: {
     lib: {
       entry: [
@@ -64,11 +66,24 @@ export default defineConfig({
   },
   resolve: {
     alias: [
+      //// This seems to break things. The below option works better.
+      // {
+      //   "@": path.resolve(__dirname, "./src"),
+      // },
       {
         find: /^@\/(.*)/,
         replacement: `${resolve(__dirname, "src")}/$1`,
       },
     ],
     // preserveSymlinks: true,
+  },
+  // Add these options for better Windows compatibility
+  server: {
+    watch: {
+      usePolling: true,
+    },
+  },
+  optimizeDeps: {
+    force: true,
   },
 });

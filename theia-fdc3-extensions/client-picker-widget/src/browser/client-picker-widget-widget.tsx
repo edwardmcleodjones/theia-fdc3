@@ -37,6 +37,9 @@ export class ClientPickerWidgetWidget extends ReactWidget {
     return (
       <div id="widget-container">
         <AlertMessage type="INFO" header={header} />
+        <div className="bg-blue-500 text-white p-4 rounded-lg shadow-md">
+          Tailwind Test
+        </div>
         <button
           id="displayMessageButton"
           className="theia-button secondary"
