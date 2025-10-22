@@ -16,11 +16,11 @@ Notes: Tests are optional and not requested here; we focus on implementation tas
 
 Purpose: Create the new extension package and wire it into the monorepo/apps.
 
-- [ ] T001 [P] Scaffold extension package at `theia-fdc3-extensions/client-picker-widget/` (create `package.json`, `tsconfig.json`, `src/browser/`)
-- [ ] T002 [P] Add runtime deps in `theia-fdc3-extensions/client-picker-widget/package.json` (e.g., `@theia/core`, `inversify`, `react`, `@finos/fdc3`)
-- [ ] T003 [P] Add build scripts in `theia-fdc3-extensions/client-picker-widget/package.json` (clean/build/watch with `tsc`)
-- [ ] T004 [P] Add dependency to include the extension in Browser app: edit `applications/browser/package.json` → `dependencies.client-picker-widget: "0.0.0"`
-- [ ] T005 [P] Add dependency to include the extension in Electron app: edit `applications/electron/package.json` → `dependencies.client-picker-widget: "0.0.0"`
+- [x] T001 [P] Scaffold extension package at `theia-fdc3-extensions/client-picker-widget/` (create `package.json`, `tsconfig.json`, `src/browser/`)
+- [x] T002 [P] Add runtime deps in `theia-fdc3-extensions/client-picker-widget/package.json` (e.g., `@theia/core`, `inversify`, `react`, `@finos/fdc3`)
+- [x] T003 [P] Add build scripts in `theia-fdc3-extensions/client-picker-widget/package.json` (clean/build/watch with `tsc`)
+- [x] T004 [P] Add dependency to include the extension in Browser app: edit `applications/browser/package.json` → `dependencies.client-picker-widget: "0.0.0"`
+- [x] T005 [P] Add dependency to include the extension in Electron app: edit `applications/electron/package.json` → `dependencies.client-picker-widget: "0.0.0"`
 
 ---
 
@@ -28,8 +28,8 @@ Purpose: Create the new extension package and wire it into the monorepo/apps.
 
 Purpose: Minimal wiring so the widget can be contributed to the left area and built by apps.
 
-- [ ] T006 Define Theia extension entry in `theia-fdc3-extensions/client-picker-widget/package.json` → `theiaExtensions.frontend: "lib/browser/client-picker-frontend-module"`
-- [ ] T007 [P] Create frontend module at `theia-fdc3-extensions/client-picker-widget/src/browser/client-picker-frontend-module.ts` (bind widget + contribution, placeholder only)
+- [x] T006 Define Theia extension entry in `theia-fdc3-extensions/client-picker-widget/package.json` → `theiaExtensions.frontend: "lib/browser/client-picker-frontend-module"`
+- [x] T007 [P] Create frontend module at `theia-fdc3-extensions/client-picker-widget/src/browser/client-picker-frontend-module.ts` (bind widget + contribution, placeholder only)
 - [ ] T008 [P] Create React widget scaffold at `theia-fdc3-extensions/client-picker-widget/src/browser/ClientPickerWidget.tsx` (placeholder list UI, no behavior yet)
 - [ ] T009 [P] Add styles at `theia-fdc3-extensions/client-picker-widget/src/browser/style/client-picker.css` and import into widget/module
 

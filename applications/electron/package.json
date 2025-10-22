@@ -104,7 +104,8 @@
     "keytar": "*",
     "ssh2": "*",
     "cpu-features": "*",
-    "theia-fdc3-extension": "0.0.0"
+    "theia-fdc3-extension": "0.0.0",
+    "client-picker-widget": "0.0.0"
   },
   "dependencies-disabled": {
     "@theia/ai-anthropic": "1.65.1",
