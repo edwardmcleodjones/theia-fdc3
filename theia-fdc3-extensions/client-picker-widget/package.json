@@ -9,6 +9,7 @@
     "src"
   ],
   "dependencies": {
+    "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/vite": "^4.1.15",
     "@theia/core": "1.65.1",
     "class-variance-authority": "^0.7.1",
@@ -52,5 +53,6 @@
     {
       "frontend": "lib/browser/client-picker-widget-frontend-module"
     }
-  ]
+  ],
+  "packageManager": "npm"
 }

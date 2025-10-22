@@ -92,9 +92,9 @@ This prevents an `Cannot apply @injectable decorator multiple times.` error due 
 
 - `cd` into the new extension folder and run `npm install` to install its dependencies. (Yes, npm install, even though the main repo uses yarn. Each Theia extension is its own npm package, so it needs its own `node_modules` folder, and `npm install` installs just the extensions packages. Yarn calls the workspace install which takes all workspace packages into account and takes ages...).
 
-You may need to use `npm install --force` if you run into dependency resolution issues.
+You may need to use `npm install --force` if you run into dependency resolution issues. This should be fixed with the additional React ranges added to: `theia-extensions\product\package.json` though.
 
-Note that if using npm you'll also need to run `yarn` in the root folder to update the lockfile after doing any `npm install` commands in extension folders.
+Note that if using npm you'll also need to run `yarn` in the root folder to update the lockfile after doing **any** `npm install` commands in extension folders. Annoying, as it insists on building all the binaries as well each time...
 
 - Add it as a dependency to the Browser and/or Electron app's `package.json` files, e.g. in `applications/browser/package.json`:
 
@@ -115,6 +115,8 @@ Then run `yarn` in the root folder to update the lockfile.
 - Restart the `yarn watch:browser` command if running.
 
 - Restart the browser app with: `yarn browser start`
+
+> Note: The `yarn watch:browser` command doesn't do a great job of picking up changes to the extension, so you're better off running `npm run watch` in the extension folder, which will cause updated files to be copied to the output `lib` folder, which then in turn will be picked up by the `yarn watch:browser` command.  You'll still need to reload the page though.
 
 ---
 

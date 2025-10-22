@@ -10,6 +10,7 @@ import { MessageService } from "@theia/core";
 import { Message } from "@theia/core/lib/browser";
 
 import { Card } from "@/browser/components/ui/card";
+import { Button } from "@/browser/components/ui/button";
 
 @injectable()
 export class ClientPickerWidgetWidget extends ReactWidget {
@@ -43,6 +44,7 @@ export class ClientPickerWidgetWidget extends ReactWidget {
           <div className="bg-blue-500 text-white p-4 rounded-lg shadow-md">
             Tailwind Test
           </div>
+          <Button>A shadcn button!</Button>
         </Card>
         <button
           id="displayMessageButton"
