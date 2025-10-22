@@ -94,6 +94,8 @@ This prevents an `Cannot apply @injectable decorator multiple times.` error due 
 
 You may need to use `npm install --force` if you run into dependency resolution issues.
 
+Note that if using npm you'll also need to run `yarn` in the root folder to update the lockfile.
+
 - Add it as a dependency to the Browser and/or Electron app's `package.json` files, e.g. in `applications/browser/package.json`:
 
 ```json
