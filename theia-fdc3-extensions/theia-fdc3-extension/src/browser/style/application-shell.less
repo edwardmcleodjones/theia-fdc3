@@ -1,0 +1,249 @@
+body {
+    // Tab height
+    --theia-island-outer: 6px;
+    --theia-island-spacing: 5px;
+    --theia-island-border-radius: 10px;
+    --theia-island-border-radius-xs: 5px;
+    --theia-island-border-radius-sm: 7px;
+    --theia-island-background: linear-gradient(135deg, #000000, #1c2526, #1a1313, #1a1313, #000000);
+
+    // Menu bar (File, Edit, ...) and status bar must be transparent
+    --theia-titleBar-activeBackground: transparent;
+    --theia-titleBar-inactiveBackground: transparent;
+    --theia-statusBar-background: transparent;
+    --theia-statusBar-noFolderBackground: transparent;
+    // Transparent background for tabs in the editor group header
+    --theia-editorGroupHeader-tabsBackground: transparent;
+    --theia-activityBar-background: transparent;
+
+    // Button size and icon size
+    --theia-private-sidebar-tab-width: 30px;
+    --theia-private-sidebar-tab-height: 30px;
+    --theia-private-sidebar-tabicon-width: 30px;
+    --theia-private-sidebar-tab-gap: var(--theia-island-spacing);
+    --theia-private-sidebar-icon-size: 16px;
+    --theia-close-button-size: 20px;
+    --theia-private-sidebar-tab-padding-top-and-bottom: 7px;
+    --theia-private-sidebar-tab-padding-left-and-right: 7px;
+
+    // Gap between tabs
+    --theia-private-horizontal-tab-scrollbar-rail-height: 0px;
+    --theia-private-horizontal-tab-height: 30px;
+    // calc(var(--theia-private-horizontal-tab-height) + var(--theia-private-horizontal-tab-scrollbar-rail-height) / 2);
+    --theia-horizontal-toolbar-height: calc(
+        var(--theia-private-horizontal-tab-height) + var(--theia-island-spacing) * 2
+    );
+
+    // Override toolbar height
+    --theia-override-toolbar-height: 30px;
+
+    --theia-tab-activeBackground: fade(#fff, 10%);
+    --theia-tab-hoverBackground: fade(#fff, 7%);
+    --theia-list-inactiveSelectionBackground: fade(#fff, 10%);
+    --theia-list-activeSelectionBackground: fade(#fff, 10%);
+    --theia-list-hoverBackground: fade(#fff, 7%);
+    --theia-tab-inactiveBackground: transparent;
+}
+
+body,
+.monaco-editor,
+.monaco-diff-editor,
+.monaco-component {
+    // --theia-editor-background: transparent;
+    // --theia-sideBar-background: transparent;
+    // --theia-panel-background: transparent;
+    // --theia-terminal-background: transparent;
+
+    --vscode-editor-background: transparent !important;
+    --vscode-editorGutter-background: transparent !important;
+}
+
+// body.theia-light {
+// }
+
+// body.theia-dark {
+// }
+
+// Background color for the whole application shell
+#theia-app-shell {
+    background: var(--theia-island-background);
+}
+
+// Spacing around the main IDE panel
+#theia-main-ide-panel {
+    border: var(--theia-island-outer) solid transparent;
+    // Remove top spacing due to spacing around tabs
+    border-top: none;
+}
+
+// Remove bottom spacing if status bar is visible
+#theia-main-ide-panel:has(+ #theia-statusBar:not(.lm-mod-hidden)) {
+    border-bottom: none;
+}
+
+#theia-top-panel {
+    .lm-Widget.lm-MenuBar {
+        padding-inline: var(--theia-island-outer);
+    }
+}
+
+#theia-statusBar {
+    border: 0 !important;
+}
+
+// Rounded corners for the panels
+#theia-left-content-panel,
+#theia-main-content-panel,
+#theia-bottom-content-panel {
+    border-radius: var(--theia-island-border-radius);
+    overflow: hidden;
+
+    @supports (overflow: clip) {
+        overflow: clip;
+    }
+}
+
+/* File tree */
+// Add inline padding to the tree container
+.theia-TreeContainer {
+    padding-inline: var(--theia-island-spacing);
+
+    [data-item-index] {
+        margin-bottom: 1px;
+    }
+
+    .theia-TreeNode {
+        height: 28px;
+        line-height: 28px;
+        border-radius: var(--theia-island-border-radius-sm);
+    }
+}
+
+/* Main tabs */
+:is(#theia-main-content-panel, #theia-bottom-content-panel) {
+    .lm-Widget.lm-TabBar {
+        border: 0 !important;
+    }
+
+    .theia-tabBar-tab-row {
+        display: flex;
+        align-items: center;
+    }
+
+    .lm-TabBar-content {
+        padding: var(--theia-island-spacing);
+        gap: var(--theia-island-spacing);
+    }
+
+    .lm-TabBar-tab {
+        border: 0 !important;
+        box-shadow: none !important;
+        height: var(--theia-private-horizontal-tab-height);
+        border-radius: var(--theia-island-border-radius-sm);
+
+        &.lm-mod-current {
+            background: var(--theia-tab-activeBackground);
+        }
+    }
+
+    .lm-TabBar-tab.lm-mod-closable > .lm-TabBar-tabCloseIcon,
+    .lm-TabBar-tab.theia-mod-pinned > .lm-TabBar-tabCloseIcon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0 0 var(--theia-island-spacing);
+        padding: 0;
+        width: var(--theia-close-button-size);
+        height: var(--theia-close-button-size);
+        box-sizing: border-box;
+    }
+
+    .lm-TabBar-tab:not(.lm-mod-closable) > .lm-TabBar-tabCloseIcon {
+        display: none;
+    }
+}
+
+/* Main content panel */
+#theia-main-content-panel {
+    background: transparent;
+
+    .lm-TabBar-content {
+        padding-inline: 0;
+    }
+
+    .lm-Widget.lm-TabBar .lm-TabBar-tab:hover {
+        background: var(--theia-tab-hoverBackground);
+    }
+
+    .lm-TabBar .lm-TabBar-tab.lm-mod-current {
+        background: var(--theia-tab-activeBackground) !important;
+    }
+
+    .lm-Widget.lm-DockPanel-widget {
+        border-radius: var(--theia-island-border-radius) var(--theia-island-border-radius) 0 0;
+        overflow: hidden;
+    }
+}
+
+/* Bottom tabs */
+#theia-bottom-content-panel {
+    .lm-Widget.lm-TabBar .lm-TabBar-tab {
+        font-size: 12px;
+        font-weight: 500;
+
+        // Hide icons
+        .lm-TabBar-tabIcon {
+            display: none;
+        }
+    }
+}
+
+/* Other fixes */
+.monaco-editor,
+.monaco-diff-editor {
+    padding-block: var(--theia-island-spacing);
+    outline: 0 !important;
+}
+
+.lm-TabBar-toolbar {
+    margin: 0;
+    padding: 0 var(--theia-island-spacing);
+}
+
+.theia-select-component {
+    min-height: 24px;
+    border-radius: var(--theia-island-border-radius-sm);
+}
+
+.action-label {
+    min-width: 18px;
+    min-height: 18px;
+    line-height: 18px;
+    padding: 2px;
+    box-sizing: content-box;
+}
+
+// Fix search input paddings
+.t-siw-search-container {
+    .searchHeader {
+        padding: 0 9px;
+
+        .search-field-container {
+            border-radius: var(--theia-island-border-radius-sm);
+        }
+    }
+
+    .theia-input {
+        border-radius: var(--theia-island-border-radius-sm);
+        padding: 3px 9px;
+    }
+}
+
+.xterm .xterm-viewport {
+    background: transparent !important;
+}
+
+// Hide logo in the top left corner
+.theia-icon {
+    display: none !important;
+}
