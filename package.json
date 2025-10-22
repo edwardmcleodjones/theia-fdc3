@@ -49,6 +49,8 @@
     "package:applications:prod": "lerna run --scope=\"theia-ide*app\" package:prod --concurrency 1",
     "permissions:writeable": "ts-node scripts/make-files-writeable.ts plugins",
     "watch": "lerna run --parallel watch",
+    "watch:browser": "lerna run --parallel watch --ignore theia-ide-electron-app",
+    "watch:electron": "lerna run --parallel watch --ignore theia-ide-browser-app",
     "test": "lerna run test",
     "electron": "yarn --cwd applications/electron",
     "browser": "yarn --cwd applications/browser",

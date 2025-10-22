@@ -13,9 +13,18 @@
   },
   "devDependencies": {
     "rimraf": "^5.0.0",
-    "typescript": "~5.4.5"
+    "typescript": "~5.4.5",
+    "vite": "^6.3.5",
+    "vite-plugin-lib-inject-css": "^2.2.2"
   },
   "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "rimraf lib",
+    "build": "vite build && yarn dts",
+    "watch": "vite build --watch --clearScreen false",
+    "dts": "tsc --emitDeclarationOnly --declaration --outDir lib"
+  },
+  "scripts-old": {
     "prepare": "yarn run clean && yarn run build",
     "clean": "rimraf lib",
     "build": "tsc",

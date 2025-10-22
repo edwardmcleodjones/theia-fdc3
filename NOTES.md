@@ -30,3 +30,25 @@ Try the instructions in the README.md first, in the `#build` section. If you run
   yarn install
   ```
   This may happen if you're trying to just build the browser output without the electron app, as keytar is an optional dependency for electron only, and the browser app uses electron as a peer dependency.
+
+---
+
+To run in watch mode for development with the Browser app:
+
+> NB: All commands are in the root `theia-fdc3` folder.
+
+In one shell - run the browser build in watch mode:
+
+```
+yarn watch:browser
+```
+
+In another shell:
+
+```
+yarn browser start
+```
+
+You'll usually need to refresh the browser page to see changes when you modify code.
+
+You also may need to run the Reset Workbench Layout command inside of Theia (using the Command Palette: `Ctrl+Shift+P`) to see new UI contributions appear correctly after code changes.

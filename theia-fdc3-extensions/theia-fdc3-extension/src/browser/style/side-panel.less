@@ -1,0 +1,85 @@
+// Set height of header panel
+.theia-header-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--theia-horizontal-toolbar-height);
+    padding: var(--theia-island-spacing) 0;
+    // background-color: var(--theia-activityBar-background);
+    border: 0 !important;
+}
+
+#theia-left-content-panel {
+    min-width: 220px !important;
+}
+
+.lm-TabBar.theia-app-sides {
+    /* Top tabs */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 100%;
+    background: unset;
+
+    /* Tabs container */
+    .theia-tabBar-tab-row {
+        overflow-x: auto;
+        scrollbar-width: none;
+        --theia-scrollbar-width: 0px;
+    }
+
+    .lm-TabBar-content {
+        display: flex;
+        gap: var(--theia-island-spacing);
+        cursor: default;
+    }
+
+    /* Tab */
+    .lm-TabBar-tab {
+        padding: 0;
+        min-width: 0;
+        min-height: 0 !important;
+        max-height: var(--theia-private-sidebar-tab-height);
+        border-radius: var(--theia-island-border-radius-sm);
+        cursor: pointer;
+        background-color: transparent;
+        transition: all 0.18s ease;
+    }
+
+    /* Tab:hover */
+    .lm-TabBar-tab:hover {
+        background-color: var(--theia-tab-hoverBackground);
+    }
+
+    /* Tab:active */
+    .lm-TabBar-tab.lm-mod-current {
+        background-color: var(--theia-tab-activeBackground);
+    }
+
+    /* Button with icon and label */
+    .lm-TabBar-tab .theia-tab-icon-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+    }
+
+    .lm-TabBar-tabIcon {
+        width: var(--theia-private-sidebar-icon-size);
+        height: var(--theia-private-sidebar-icon-size);
+    }
+
+    /* Label */
+    .lm-TabBar-tabLabel {
+        display: inline-flex;
+        white-space: nowrap;
+        margin-left: 8px;
+    }
+}
+
+// Toolbar with widget name and actions
+.theia-sidepanel-toolbar {
+    min-height: calc(var(--theia-override-toolbar-height) + var(--theia-island-spacing) * 2);
+    padding: var(--theia-island-spacing) 0;
+    border-radius: var(--theia-island-border-radius) var(--theia-island-border-radius) 0 0;
+}
