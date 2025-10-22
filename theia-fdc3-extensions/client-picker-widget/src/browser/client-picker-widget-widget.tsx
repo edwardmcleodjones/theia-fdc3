@@ -44,7 +44,9 @@ export class ClientPickerWidgetWidget extends ReactWidget {
           <div className="bg-blue-500 text-white p-4 rounded-lg shadow-md">
             Tailwind Test
           </div>
-          <Button>A shadcn button!</Button>
+          <Button onClick={() => this.displayMessage()}>
+            A shadcn button!
+          </Button>
         </Card>
         <button
           id="displayMessageButton"
@@ -59,9 +61,7 @@ export class ClientPickerWidgetWidget extends ReactWidget {
   }
 
   protected displayMessage(): void {
-    this.messageService.info(
-      "Congratulations: ClientPickerWidget Widget Successfully Created!"
-    );
+    this.messageService.info("Hello from the Client Picker Widget!");
   }
 
   protected onActivateRequest(msg: Message): void {
