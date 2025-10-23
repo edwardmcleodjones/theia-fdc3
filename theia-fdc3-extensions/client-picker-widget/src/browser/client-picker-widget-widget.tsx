@@ -82,9 +82,9 @@ export class ClientPickerWidgetWidget extends ReactWidget {
         className="dark client-picker-widget flex h-full flex-col gap-3 p-4"
       >
         <header className="flex flex-col gap-1">
-          <h1 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          {/* <h1 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
             Client Directory
-          </h1>
+          </h1> */}
           <p className="text-sm text-muted-foreground">
             Select a client to broadcast their FDC3 context to the active
             workspace.
@@ -123,7 +123,7 @@ export class ClientPickerWidgetWidget extends ReactWidget {
             this.nameFilter = e.target.value;
             this.update();
           }}
-          className="max-w-[200px]"
+          className="min-w-[150px] flex-1"
         />
         <Select
           value={this.industryFilter}
@@ -132,7 +132,7 @@ export class ClientPickerWidgetWidget extends ReactWidget {
             this.update();
           }}
         >
-          <SelectTrigger className="max-w-[200px]">
+          <SelectTrigger className="min-w-[150px] flex-1">
             <SelectValue placeholder="All" />
           </SelectTrigger>
           <SelectContent>
@@ -151,18 +151,17 @@ export class ClientPickerWidgetWidget extends ReactWidget {
             this.locationFilter = e.target.value;
             this.update();
           }}
-          className="max-w-[200px]"
+          className="min-w-[150px] flex-1"
         />
         <Button
           variant="outline"
-          size="sm"
           onClick={() => {
             this.nameFilter = "";
             this.industryFilter = "all";
             this.locationFilter = "";
             this.update();
           }}
-          className="ml-auto"
+          className="min-w-20"
         >
           Clear
         </Button>
@@ -216,10 +215,14 @@ export class ClientPickerWidgetWidget extends ReactWidget {
         <TableCell className="font-medium text-foreground">
           {client.name}
         </TableCell>
-        <TableCell className="text-foreground">{client.segment}</TableCell>
-        <TableCell className="text-foreground">{client.location}</TableCell>
         <TableCell className="text-muted-foreground">
-          {/* Placeholder for last visit date */}-
+          {client.segment}
+        </TableCell>
+        <TableCell className="text-muted-foreground">
+          {client.location}
+        </TableCell>
+        <TableCell className="text-muted-foreground">
+          {client.lastVisit}
         </TableCell>
       </TableRow>
     );

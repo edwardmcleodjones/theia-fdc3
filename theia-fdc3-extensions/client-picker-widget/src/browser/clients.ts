@@ -3,6 +3,7 @@ export interface ClientSummary {
   readonly name: string;
   readonly segment: string;
   readonly location: string;
+  readonly lastVisit: string;
   readonly notes?: string;
 }
 
@@ -16,6 +17,7 @@ export const CLIENTS: ClientSummary[] = [
     name: "Acme Capital",
     segment: "Asset Management",
     location: "New York, USA",
+    lastVisit: "2025-06-15",
     notes: "Top equities customer",
   },
   {
@@ -23,12 +25,14 @@ export const CLIENTS: ClientSummary[] = [
     name: "Borealis Bank",
     segment: "Retail Banking",
     location: "Oslo, Norway",
+    lastVisit: "2025-07-01",
   },
   {
     clientId: "cl-cascade-003",
     name: "Cascade Insurance",
     segment: "Insurance",
     location: "Seattle, USA",
+    lastVisit: "2025-06-20",
     notes: "Interest in structured products",
   },
   {
@@ -36,12 +40,14 @@ export const CLIENTS: ClientSummary[] = [
     name: "Delta Pension Fund",
     segment: "Pension Fund",
     location: "London, UK",
+    lastVisit: "2025-07-10",
   },
   {
     clientId: "cl-ember-005",
     name: "Ember Trading",
     segment: "Broker Dealer",
     location: "Hong Kong, China",
+    lastVisit: "2025-07-18",
     notes: "Active in APAC derivatives",
   },
   {
@@ -49,18 +55,21 @@ export const CLIENTS: ClientSummary[] = [
     name: "Frontier Wealth",
     segment: "Private Wealth",
     location: "Zurich, Switzerland",
+    lastVisit: "2025-07-12",
   },
   {
     clientId: "cl-horizon-007",
     name: "Horizon Mutual",
     segment: "Mutual Fund",
     location: "Toronto, Canada",
+    lastVisit: "2025-06-28",
   },
   {
     clientId: "cl-novar-008",
     name: "Novar Analytics",
     segment: "FinTech",
     location: "Austin, USA",
+    lastVisit: "2025-07-05",
     notes: "Pilot for API-driven research",
   },
   {
@@ -68,12 +77,14 @@ export const CLIENTS: ClientSummary[] = [
     name: "Oceanic Holdings",
     segment: "Family Office",
     location: "Singapore",
+    lastVisit: "2025-06-22",
   },
   {
     clientId: "cl-solstice-010",
     name: "Solstice Partners",
     segment: "Hedge Fund",
     location: "Sydney, Australia",
+    lastVisit: "2025-07-08",
     notes: "Focus on macro strategies",
   },
 ];
