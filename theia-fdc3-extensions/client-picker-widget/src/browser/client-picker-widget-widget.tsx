@@ -171,13 +171,17 @@ export class ClientPickerWidgetWidget extends ReactWidget {
 
   protected renderTable(clients: ClientSummary[]): React.ReactElement {
     return (
-      <div className="rounded-md border">
+      <div className="@container rounded-md border">
         <Table>
           <TableHeader>
             <TableRow className="border-b bg-muted/50 hover:bg-muted/50">
               <TableHead className="font-semibold">Client Name</TableHead>
-              <TableHead className="font-semibold">Industry</TableHead>
-              <TableHead className="font-semibold">Location</TableHead>
+              <TableHead className="hidden font-semibold @[600px]:table-cell">
+                Industry
+              </TableHead>
+              <TableHead className="hidden font-semibold @[600px]:table-cell">
+                Location
+              </TableHead>
               <TableHead className="font-semibold">Last Visit</TableHead>
             </TableRow>
           </TableHeader>
@@ -213,12 +217,18 @@ export class ClientPickerWidgetWidget extends ReactWidget {
         onClick={() => this.handleClientSelection(client)}
       >
         <TableCell className="font-medium text-foreground">
-          {client.name}
+          <div className="flex flex-col gap-1">
+            <span>{client.name}</span>
+            <div className="flex flex-col text-xs text-muted-foreground @[600px]:hidden">
+              <span>{client.segment}</span>
+              <span>{client.location}</span>
+            </div>
+          </div>
         </TableCell>
-        <TableCell className="text-muted-foreground">
+        <TableCell className="hidden text-muted-foreground @[600px]:table-cell">
           {client.segment}
         </TableCell>
-        <TableCell className="text-muted-foreground">
+        <TableCell className="hidden text-muted-foreground @[600px]:table-cell">
           {client.location}
         </TableCell>
         <TableCell className="text-muted-foreground">
