@@ -25,13 +25,6 @@ import {
 } from "@/browser/components/ui/card";
 import { Button } from "@/browser/components/ui/button";
 
-/**
- * Inline data URI generated from resources/icon.svg so the icon works in both
- * bundled and declaration-only builds without extra loaders.
- */
-const CLIENT_PICKER_ICON_DATA_URI =
-  "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICA8cmVjdCB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHg9IjIiIHk9IjIiIHJ4PSI0IiByeT0iNCIgZmlsbD0iIzI1NjNlYiIgLz4KICA8cGF0aAogICAgZmlsbD0iI2ZmZiIKICAgIGQ9Ik04Ljc1IDdhMi4yNSAyLjI1IDAgMSAxIDAgNC41QTIuMjUgMi4yNSAwIDAgMSA4Ljc1IDdabTYuNSAwYTIuMjUgMi4yNSAwIDEgMSAwIDQuNSAyLjI1IDIuMjUgMCAwIDEgMC00LjVabS05LjUxOSA3LjU4YS43NS43NSAwIDAgMSAxLjAzOC0uMjA2bDEuNTU2IDEuMDM3YTEuMjUgMS4yNSAwIDAgMCAxLjU2NC0uMTRsMS44NjYtMS44NjZhLjc1Ljc1IDAgMCAxIDEuMDYgMGwxLjg2NiAxLjg2NmExLjI1IDEuMjUgMCAwIDAgMS41NjQuMTRsMS41NTYtMS4wMzdhLjc1Ljc1IDAgMCAxIC44MzIgMS4yNDRsLTEuNTU2IDEuMDM3YTIuNzUgMi43NSAwIDAgMS0zLjQ0Mi0uMzA4bC0xLjMzNi0xLjMzNi0xLjMzNiAxLjMzNmEyLjc1IDIuNzUgMCAwIDEtMy40NDIuMzA4bC0xLjU1Ni0xLjAzN2EuNzUuNzUgMCAwIDEtLjIwNi0xLjAzOFoiCiAgLz4KPC9zdmc+Cg==";
-
 @injectable()
 export class ClientPickerWidgetWidget extends ReactWidget {
   static readonly ID = "client-picker-widget:widget";
@@ -59,8 +52,7 @@ export class ClientPickerWidgetWidget extends ReactWidget {
     this.title.label = ClientPickerWidgetWidget.LABEL;
     this.title.caption = ClientPickerWidgetWidget.LABEL;
     this.title.closable = true;
-    this.title.iconClass = "client-picker-widget-icon";
-    this.registerIconStyle(CLIENT_PICKER_ICON_DATA_URI);
+    this.title.iconClass = "fa fa-crosshairs";
     this.outputChannel = this.outputChannelManager?.getChannel(
       CLIENT_PICKER_OUTPUT_CHANNEL
     );
@@ -98,8 +90,8 @@ export class ClientPickerWidgetWidget extends ReactWidget {
       this.status.variant === "success"
         ? "SUCCESS"
         : this.status.variant === "warning"
-          ? "WARNING"
-          : "ERROR";
+        ? "WARNING"
+        : "ERROR";
 
     return <AlertMessage type={type} header={this.status.message} />;
   }
@@ -144,9 +136,7 @@ export class ClientPickerWidgetWidget extends ReactWidget {
     void this.broadcastClientContext(client);
   }
 
-  protected async broadcastClientContext(
-    client: ClientSummary
-  ): Promise<void> {
+  protected async broadcastClientContext(client: ClientSummary): Promise<void> {
     const context = {
       type: "fdc3.client",
       name: client.name,
@@ -187,10 +177,7 @@ export class ClientPickerWidgetWidget extends ReactWidget {
     this.update();
   }
 
-  protected log(
-    level: "info" | "warn" | "error",
-    message: string
-  ): void {
+  protected log(level: "info" | "warn" | "error", message: string): void {
     const line = `[ClientPicker] ${message}`;
     if (this.outputChannel) {
       this.outputChannel.appendLine(line);
@@ -213,20 +200,4 @@ export class ClientPickerWidgetWidget extends ReactWidget {
       return String(error);
     }
   }
-
-  protected registerIconStyle(dataUri: string): void {
-    const styleId = "client-picker-widget-icon-style";
-    if (document.getElementById(styleId)) {
-      return;
-    }
-    const styleElement = document.createElement("style");
-    styleElement.id = styleId;
-    styleElement.textContent = `
-.client-picker-widget-icon {
-  background: center / contain no-repeat url("${dataUri}");
-}
-`;
-    document.head.appendChild(styleElement);
-  }
-
 }
