@@ -1,6 +1,6 @@
 import { ContainerModule } from "@theia/core/shared/inversify";
 import { ClientPickerWidgetWidget } from "./client-picker-widget-widget";
-import { ClientPickerWidgetContribution } from "./client-picker-widget-contribution";
+import { ClientPickerContribution } from "./ClientPickerContribution";
 import {
   bindViewContribution,
   FrontendApplicationContribution,
@@ -10,9 +10,9 @@ import {
 import "../../src/browser/style/index.css";
 
 export default new ContainerModule((bind) => {
-  bindViewContribution(bind, ClientPickerWidgetContribution);
+  bindViewContribution(bind, ClientPickerContribution);
   bind(FrontendApplicationContribution).toService(
-    ClientPickerWidgetContribution
+    ClientPickerContribution
   );
   bind(ClientPickerWidgetWidget).toSelf();
   bind(WidgetFactory)

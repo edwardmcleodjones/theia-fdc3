@@ -1,0 +1,11 @@
+# Ignore generated output
+node_modules/
+dist/
+lib/
+build/
+coverage/
+plugins/
+**/*.min.js
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

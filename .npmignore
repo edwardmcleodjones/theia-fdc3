@@ -1,0 +1,25 @@
+# Exclude build artifacts
+node_modules/
+dist/
+lib/
+build/
+coverage/
+
+# Exclude configuration and development files
+.git/
+.gitignore
+Dockerfile*
+.dockerignore
+.eslintrc*
+.eslintignore
+.prettierrc*
+.prettierignore
+.vscode/
+.idea/
+
+# Logs and temp
+*.log
+*.log*
+*.tmp
+npm-debug.log*
+yarn-debug.log*

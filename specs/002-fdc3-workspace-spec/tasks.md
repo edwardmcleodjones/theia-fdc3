@@ -116,3 +116,4 @@ Summary:
 - Independent test criteria: For US2, selection triggers `fdc3.broadcast` with correct payload (or fallback log if API unavailable)
 - Suggested MVP scope: Phase 1–3 (through US2)
 - Format validation: All tasks follow `- [ ] T### [P?] [US?] Description with file path`
+

@@ -6,5 +6,6 @@ export default async (): Promise<Config.InitialOptions> => ({
     rootDir: '../',
     transform: {
         '^.+\\.(ts)$': 'ts-jest',
-    }
+    },
+    setupFiles: ['<rootDir>/src/browser/test-setup.ts'],
 });

@@ -6,12 +6,15 @@
   "version": "0.0.0",
   "files": [
     "lib",
-    "src"
+    "src",
+    "resources"
   ],
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/vite": "^4.1.15",
+    "@finos/fdc3": "^2.2.0",
     "@theia/core": "1.65.1",
+    "@theia/output": "1.65.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.546.0",
@@ -40,7 +43,8 @@
     "clean": "rimraf lib",
     "build": "vite build && npm run dts",
     "watch": "vite build --watch --clearScreen false",
-    "dts": "tsc --emitDeclarationOnly --declaration --outDir lib"
+    "dts": "tsc --emitDeclarationOnly --declaration --outDir lib",
+    "test": "jest --config configs/jest.config.ts"
   },
   "scripts-old": {
     "prepare": "yarn run clean && yarn run build",
