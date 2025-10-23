@@ -17,12 +17,21 @@ import {
   type ClientSummary,
 } from "./clients";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/browser/components/ui/card";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/browser/components/ui/table";
+import { Input } from "@/browser/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/browser/components/ui/select";
 import { Button } from "@/browser/components/ui/button";
 
 @injectable()
@@ -41,6 +50,10 @@ export class ClientPickerWidgetWidget extends ReactWidget {
     | { variant: "success"; message: string }
     | { variant: "warning"; message: string }
     | { variant: "error"; message: string };
+  protected nameFilter: string = "";
+  protected industryFilter: string = "all";
+  protected locationFilter: string = "";
+  protected lastVisitFilter: string = "";
 
   @postConstruct()
   protected init(): void {
@@ -60,10 +73,13 @@ export class ClientPickerWidgetWidget extends ReactWidget {
   }
 
   render(): React.ReactElement {
+    const filteredClients = this.getFilteredClients();
+    const industries = this.getUniqueIndustries();
+
     return (
       <div
         id="widget-container"
-        className="client-picker-widget flex h-full flex-col gap-3 p-4"
+        className="dark client-picker-widget flex h-full flex-col gap-3 p-4"
       >
         <header className="flex flex-col gap-1">
           <h1 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
@@ -75,8 +91,9 @@ export class ClientPickerWidgetWidget extends ReactWidget {
           </p>
         </header>
         {this.renderStatus()}
-        <div className="client-list flex-1 space-y-3 overflow-y-auto pr-1">
-          {this.clients.map((client) => this.renderClientCard(client))}
+        {this.renderFilters(industries)}
+        <div className="flex-1 overflow-auto">
+          {this.renderTable(filteredClients)}
         </div>
       </div>
     );
@@ -96,38 +113,140 @@ export class ClientPickerWidgetWidget extends ReactWidget {
     return <AlertMessage type={type} header={this.status.message} />;
   }
 
-  protected renderClientCard(client: ClientSummary): React.ReactElement {
+  protected renderFilters(industries: string[]): React.ReactElement {
+    return (
+      <div className="flex flex-wrap gap-2">
+        <Input
+          placeholder="Search name..."
+          value={this.nameFilter}
+          onChange={(e) => {
+            this.nameFilter = e.target.value;
+            this.update();
+          }}
+          className="max-w-[200px]"
+        />
+        <Select
+          value={this.industryFilter}
+          onValueChange={(value) => {
+            this.industryFilter = value;
+            this.update();
+          }}
+        >
+          <SelectTrigger className="max-w-[200px]">
+            <SelectValue placeholder="All" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All</SelectItem>
+            {industries.map((industry) => (
+              <SelectItem key={industry} value={industry}>
+                {industry}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Input
+          placeholder="Search location..."
+          value={this.locationFilter}
+          onChange={(e) => {
+            this.locationFilter = e.target.value;
+            this.update();
+          }}
+          className="max-w-[200px]"
+        />
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            this.nameFilter = "";
+            this.industryFilter = "all";
+            this.locationFilter = "";
+            this.update();
+          }}
+          className="ml-auto"
+        >
+          Clear
+        </Button>
+      </div>
+    );
+  }
+
+  protected renderTable(clients: ClientSummary[]): React.ReactElement {
+    return (
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow className="border-b bg-muted/50 hover:bg-muted/50">
+              <TableHead className="font-semibold">Client Name</TableHead>
+              <TableHead className="font-semibold">Industry</TableHead>
+              <TableHead className="font-semibold">Location</TableHead>
+              <TableHead className="font-semibold">Last Visit</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {clients.length === 0 ? (
+              <TableRow>
+                <TableCell
+                  colSpan={4}
+                  className="text-center text-muted-foreground"
+                >
+                  No clients found
+                </TableCell>
+              </TableRow>
+            ) : (
+              clients.map((client) => this.renderTableRow(client))
+            )}
+          </TableBody>
+        </Table>
+      </div>
+    );
+  }
+
+  protected renderTableRow(client: ClientSummary): React.ReactElement {
     const isSelected = this.selectedClientId === client.clientId;
     return (
-      <Card
+      <TableRow
         key={client.clientId}
-        className={`transition-all ${
+        className={`cursor-pointer border-b transition-colors ${
           isSelected
-            ? "border-primary shadow-md ring-2 ring-primary/30"
-            : "hover:shadow"
+            ? "bg-primary/20 hover:bg-primary/25"
+            : "hover:bg-accent/50"
         }`}
+        onClick={() => this.handleClientSelection(client)}
       >
-        <CardHeader className="gap-1">
-          <CardTitle className="text-base">{client.name}</CardTitle>
-          <CardDescription className="text-xs uppercase tracking-wide">
-            {client.segment}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-2 text-sm text-muted-foreground">
-          <span>{client.location}</span>
-          {client.notes ? <span>{client.notes}</span> : null}
-        </CardContent>
-        <div className="px-6 pb-6">
-          <Button
-            className="w-full"
-            variant={isSelected ? "secondary" : "default"}
-            onClick={() => this.handleClientSelection(client)}
-          >
-            {isSelected ? "Selected" : "Broadcast Context"}
-          </Button>
-        </div>
-      </Card>
+        <TableCell className="font-medium text-foreground">
+          {client.name}
+        </TableCell>
+        <TableCell className="text-foreground">{client.segment}</TableCell>
+        <TableCell className="text-foreground">{client.location}</TableCell>
+        <TableCell className="text-muted-foreground">
+          {/* Placeholder for last visit date */}-
+        </TableCell>
+      </TableRow>
     );
+  }
+
+  protected getUniqueIndustries(): string[] {
+    const industries = new Set(this.clients.map((c) => c.segment));
+    return Array.from(industries).sort();
+  }
+
+  protected getFilteredClients(): ClientSummary[] {
+    return this.clients.filter((client) => {
+      const nameMatch =
+        this.nameFilter === "" ||
+        client.name.toLowerCase().includes(this.nameFilter.toLowerCase());
+
+      const industryMatch =
+        this.industryFilter === "all" || client.segment === this.industryFilter;
+
+      const locationMatch =
+        this.locationFilter === "" ||
+        client.location
+          .toLowerCase()
+          .includes(this.locationFilter.toLowerCase());
+
+      return nameMatch && industryMatch && locationMatch;
+    });
   }
 
   protected handleClientSelection(client: ClientSummary): void {

@@ -10,9 +10,10 @@
     "resources"
   ],
   "dependencies": {
+    "@finos/fdc3": "^2.2.0",
+    "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/vite": "^4.1.15",
-    "@finos/fdc3": "^2.2.0",
     "@theia/core": "1.65.1",
     "@theia/output": "1.65.1",
     "class-variance-authority": "^0.7.1",
