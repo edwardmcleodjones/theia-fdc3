@@ -1,0 +1,32 @@
+{
+  "name": "fdc3-test-consumer",
+  "keywords": [
+    "theia-extension"
+  ],
+  "version": "0.0.0",
+  "description": "Test extension that listens for FDC3 broadcasts and surfaces them via Theia notifications.",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "prepare": "npm run clean && npm run build",
+    "clean": "rimraf lib",
+    "build": "tsc -p .",
+    "watch": "tsc -p . -w --preserveWatchOutput"
+  },
+  "dependencies": {
+    "@finos/fdc3": "^2.2.0",
+    "@theia/core": "1.65.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.70",
+    "rimraf": "^5.0.0",
+    "typescript": "~5.4.5"
+  },
+  "theiaExtensions": [
+    {
+      "frontend": "lib/browser/fdc3-test-consumer-frontend-module"
+    }
+  ]
+}

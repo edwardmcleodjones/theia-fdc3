@@ -87,6 +87,8 @@
     "fs-extra": "^9.0.1",
     "theia-fdc3-extension": "0.0.0",
     "client-picker-widget": "0.0.0",
+    "fdc3-test-consumer": "0.0.0",
+    "fdc3-test-producer": "0.0.0",
     "theia-ide-product-ext": "1.65.100"
   },
   "dependencies-disabled": {
