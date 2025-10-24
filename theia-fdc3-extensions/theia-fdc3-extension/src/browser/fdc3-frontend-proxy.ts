@@ -1,4 +1,4 @@
-import { inject, injectable, postConstruct } from "@theia/core/shared/inversify";
+import { inject, injectable, optional, postConstruct } from "@theia/core/shared/inversify";
 import { WebSocketConnectionProvider } from "@theia/core/lib/browser/messaging/ws-connection-provider";
 import type {
   AppIdentifier,
@@ -24,14 +24,22 @@ import type { DesktopAgent } from "@theia-fdc3/fdc3/types/desktop-agent.interfac
 import type { ContextFilter } from "@theia-fdc3/fdc3/types/context.interface";
 import type { IntentName } from "@theia-fdc3/fdc3/types/intent.interface";
 import type { ChannelId } from "@theia-fdc3/fdc3/types/channel.interface";
+import { OutputChannel, OutputChannelManager } from "@theia/output/lib/browser/output-channel";
+
+const FDC3_EVENTS_OUTPUT_CHANNEL = "FDC3 events";
 
 @injectable()
 export class Fdc3FrontendProxy implements DesktopAgent, Fdc3Client {
+  @inject(OutputChannelManager)
+  @optional()
+  protected readonly outputChannelManager?: OutputChannelManager;
+
   private readonly contextHandlers = new Map<string, ContextHandler>();
   private readonly intentHandlers = new Map<string, IntentHandler>();
   private readonly channelCache = new Map<ChannelId, Channel>();
   private readonly allowedOrigins = new Set<string>();
   private service!: Fdc3Service;
+  private fdc3EventsChannel?: OutputChannel;
 
   constructor(
     @inject(WebSocketConnectionProvider)
@@ -44,10 +52,12 @@ export class Fdc3FrontendProxy implements DesktopAgent, Fdc3Client {
     this.service = await this.connectionProvider.createProxy<Fdc3Service>(FDC3_SERVICE_PATH, this);
     this.installWebviewBridge();
     (window as unknown as { fdc3?: DesktopAgent }).fdc3 = this;
+    this.ensureEventsChannel();
   }
 
   async broadcast(context: Context): Promise<void> {
     this.ensureTrustedCaller();
+    this.logFdc3Event("broadcast", { context });
     await this.getService().broadcast(context);
   }
 
@@ -100,7 +110,9 @@ export class Fdc3FrontendProxy implements DesktopAgent, Fdc3Client {
     target?: AppIdentifier | string,
   ): Promise<IntentResolution> {
     this.ensureTrustedCaller();
+    this.logFdc3Event("raiseIntent", { intent, context, target });
     const plain = await this.getService().raiseIntent(intent, context, target);
+    this.logFdc3Event("intentResolution", plain);
     return this.toIntentResolution(plain);
   }
 
@@ -157,6 +169,7 @@ export class Fdc3FrontendProxy implements DesktopAgent, Fdc3Client {
   }
 
   onContext(listenerId: string, context: Context): void {
+    this.logFdc3Event("contextReceived", { listenerId, context });
     const handler = this.contextHandlers.get(listenerId);
     if (handler) {
       handler(context);
@@ -164,13 +177,22 @@ export class Fdc3FrontendProxy implements DesktopAgent, Fdc3Client {
   }
 
   async onIntent(listenerId: string, context: Context): Promise<IntentResult | void> {
+    this.logFdc3Event("intentReceived", { listenerId, context });
     const handler = this.intentHandlers.get(listenerId);
     if (!handler) {
       return undefined;
     }
     try {
-      return await handler(context);
+      const handlerResult = await handler(context);
+      if (handlerResult !== undefined) {
+        this.logFdc3Event("intentHandlerResult", { listenerId, result: handlerResult });
+      }
+      return handlerResult;
     } catch (error) {
+      this.logFdc3Event("intentHandlerError", {
+        listenerId,
+        error: this.formatError(error),
+      });
       console.error("[Fdc3FrontendProxy] intent handler threw", error);
       throw error;
     }
@@ -274,6 +296,50 @@ export class Fdc3FrontendProxy implements DesktopAgent, Fdc3Client {
       throw new Error("FDC3 service is not initialised yet.");
     }
     return this.service;
+  }
+
+  private ensureEventsChannel(): OutputChannel | undefined {
+    if (!this.outputChannelManager) {
+      return undefined;
+    }
+    if (!this.fdc3EventsChannel) {
+      this.fdc3EventsChannel = this.outputChannelManager.getChannel(FDC3_EVENTS_OUTPUT_CHANNEL);
+    }
+    return this.fdc3EventsChannel;
+  }
+
+  private logFdc3Event(event: string, payload?: unknown): void {
+    const channel = this.ensureEventsChannel();
+    if (!channel) {
+      return;
+    }
+    const timestamp = new Date().toISOString();
+    const suffix = payload === undefined ? "" : ` ${this.formatPayload(payload)}`;
+    channel.appendLine(`[${timestamp}] ${event}${suffix}`);
+  }
+
+  private formatPayload(payload: unknown): string {
+    if (payload === null) {
+      return "null";
+    }
+    if (typeof payload === "string") {
+      return payload;
+    }
+    try {
+      return JSON.stringify(payload);
+    } catch (error) {
+      return JSON.stringify({
+        error: "unserializable payload",
+        detail: this.formatError(error),
+      });
+    }
+  }
+
+  private formatError(error: unknown): string {
+    if (error instanceof Error) {
+      return `${error.name}: ${error.message}`;
+    }
+    return String(error);
   }
 }
 
