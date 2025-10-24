@@ -17,6 +17,14 @@
     "moduleResolution": "node",
     "target": "ES2017",
     "jsx": "react",
+    "baseUrl": "src",
+    "paths": {
+      "@theia-fdc3/fdc3/*": ["fdc3/*"],
+      "@theia-fdc3/common/*": ["common/*"],
+      "@theia-fdc3/browser/*": ["browser/*"],
+      "@theia-fdc3/node/*": ["node/*"],
+      "@theia-fdc3/electron/*": ["electron-browser/*"]
+    },
     "lib": ["es2022", "dom"],
     "sourceMap": true,
     "rootDir": "src",

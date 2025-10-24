@@ -120,6 +120,19 @@ Then run `yarn` in the root folder to update the lockfile.
 
 ---
 
+## FDC3 Desktop Agent Smoke Tests
+
+1. Install and enable the `fdc3-test-producer` and `fdc3-test-consumer` extensions (both live under `theia-fdc3-extensions/`).
+2. Launch two workspaces side-by-side. Run the **Broadcast Sample Context** command in only one workspace:
+   - Confirm the consumer in that workspace raises a notification.
+   - Confirm the second workspace does not react (validates isolation).
+3. Update the consumer to register a specific context type (e.g. `"fdc3.instrument"`) and broadcast both matching/non-matching types to verify filtering.
+4. Register an intent handler through the consumer (the sample command in the consumer shows how to hook into `addIntentListener`). Trigger the handler via **Raise Intent** in the producer. When only one handler exists the request should auto-resolve.
+5. Repeat with a second intent listener registered to observe the placeholder warning until the resolver UI is implemented.
+
+
+---
+
 Tailwind support:
 
 See discussion and sample vite config here: https://github.com/eclipse-theia/theia/discussions/13455

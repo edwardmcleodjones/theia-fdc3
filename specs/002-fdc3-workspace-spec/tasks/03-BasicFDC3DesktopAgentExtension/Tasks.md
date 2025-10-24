@@ -27,10 +27,10 @@ Project uses monorepo structure:
 
 **Purpose**: Project initialization and basic structure for FDC3 DesktopAgent extension
 
-- [ ] T001 Create FDC3 extension directory structure in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/
-- [ ] T002 Install @finos/fdc3 type definitions in theia-fdc3-extensions/theia-fdc3-extension/package.json
-- [ ] T003 [P] Configure TypeScript compilation for FDC3 module in theia-fdc3-extensions/theia-fdc3-extension/tsconfig.json
-- [ ] T004 [P] Setup Inversify dependency injection bindings file theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/fdc3-di-module.ts
+- [X] T001 Create FDC3 extension directory structure in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/
+- [X] T002 Install @finos/fdc3 type definitions in theia-fdc3-extensions/theia-fdc3-extension/package.json
+- [X] T003 [P] Configure TypeScript compilation for FDC3 module in theia-fdc3-extensions/theia-fdc3-extension/tsconfig.json
+- [X] T004 [P] Setup Inversify dependency injection bindings file theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/fdc3-di-module.ts
 
 ---
 
@@ -40,12 +40,12 @@ Project uses monorepo structure:
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T005 Define DesktopAgent interface matching FDC3 spec in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/types/desktop-agent.interface.ts
-- [ ] T006 [P] Define Context type interfaces in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/types/context.interface.ts
-- [ ] T007 [P] Define Intent type interfaces in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/types/intent.interface.ts
-- [ ] T008 [P] Define Channel type interfaces in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/types/channel.interface.ts
-- [ ] T009 Create workspace context bus manager in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/workspace-context-bus.service.ts
-- [ ] T010 Implement event emitter infrastructure keyed by workspaceId in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/workspace-context-bus.service.ts
+- [X] T005 Define DesktopAgent interface matching FDC3 spec in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/types/desktop-agent.interface.ts
+- [X] T006 [P] Define Context type interfaces in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/types/context.interface.ts
+- [X] T007 [P] Define Intent type interfaces in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/types/intent.interface.ts
+- [X] T008 [P] Define Channel type interfaces in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/types/channel.interface.ts
+- [X] T009 Create workspace context bus manager in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/workspace-context-bus.service.ts
+- [X] T010 Implement event emitter infrastructure keyed by workspaceId in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/workspace-context-bus.service.ts
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -59,12 +59,12 @@ Project uses monorepo structure:
 
 ### Implementation for User Story 1
 
-- [ ] T011 [P] [US1] Create Workspace entity model in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/models/workspace.model.ts
-- [ ] T012 [P] [US1] Create Channel entity model in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/models/channel.model.ts
-- [ ] T013 [US1] Implement workspace-to-channel mapping service in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/workspace-channel-mapper.service.ts
-- [ ] T014 [US1] Add workspace isolation logic to context bus manager in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/workspace-context-bus.service.ts
-- [ ] T015 [US1] Implement channel member tracking per workspace in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/workspace-context-bus.service.ts
-- [ ] T016 [US1] Add validation to ensure broadcasts only propagate within workspace boundaries in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/workspace-context-bus.service.ts
+- [X] T011 [P] [US1] Create Workspace entity model in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/models/workspace.model.ts
+- [X] T012 [P] [US1] Create Channel entity model in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/models/channel.model.ts
+- [X] T013 [US1] Implement workspace-to-channel mapping service in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/workspace-channel-mapper.service.ts
+- [X] T014 [US1] Add workspace isolation logic to context bus manager in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/workspace-context-bus.service.ts
+- [X] T015 [US1] Implement channel member tracking per workspace in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/workspace-context-bus.service.ts
+- [X] T016 [US1] Add validation to ensure broadcasts only propagate within workspace boundaries in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/workspace-context-bus.service.ts
 
 **Checkpoint**: At this point, workspace isolation should be functional - broadcasts in one workspace don't affect others
 
@@ -78,13 +78,13 @@ Project uses monorepo structure:
 
 ### Implementation for User Story 2
 
-- [ ] T017 [P] [US2] Create DesktopAgentImpl class skeleton with stub methods in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T018 [US2] Implement broadcast(context) method to publish to workspace context bus in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T019 [US2] Implement addContextListener(contextType, handler) method in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T020 [US2] Add context type filtering logic to listener registration in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T021 [US2] Implement listener cleanup and unsubscribe logic in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T022 [US2] Add current workspace detection to route broadcasts correctly in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T023 [US2] Implement context validation against FDC3 context type schema in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/context-validator.service.ts
+- [X] T017 [P] [US2] Create DesktopAgentImpl class skeleton with stub methods in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T018 [US2] Implement broadcast(context) method to publish to workspace context bus in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T019 [US2] Implement addContextListener(contextType, handler) method in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T020 [US2] Add context type filtering logic to listener registration in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T021 [US2] Implement listener cleanup and unsubscribe logic in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T022 [US2] Add current workspace detection to route broadcasts correctly in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T023 [US2] Implement context validation against FDC3 context type schema in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/context-validator.service.ts
 
 **Checkpoint**: At this point, apps should be able to broadcast and listen for contexts within their workspace
 
@@ -98,15 +98,15 @@ Project uses monorepo structure:
 
 ### Implementation for User Story 3
 
-- [ ] T024 [P] [US3] Create Intent entity model in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/models/intent.model.ts
-- [ ] T025 [P] [US3] Create IntentResolution entity model in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/models/intent-resolution.model.ts
-- [ ] T026 [US3] Create intent registry service in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/intent-registry.service.ts
-- [ ] T027 [US3] Implement addIntentListener(intent, handler) method in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T028 [US3] Implement raiseIntent(intent, context, target) method with handler lookup in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T029 [US3] Add auto-routing logic for single handler case in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T030 [US3] Add placeholder for multiple handler resolution (to be implemented in resolver task) in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T031 [US3] Implement findIntent(intent) method to query available handlers in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T032 [US3] Implement findIntentsByContext(context) method in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T024 [P] [US3] Create Intent entity model in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/models/intent.model.ts
+- [X] T025 [P] [US3] Create IntentResolution entity model in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/models/intent-resolution.model.ts
+- [X] T026 [US3] Create intent registry service in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/intent-registry.service.ts
+- [X] T027 [US3] Implement addIntentListener(intent, handler) method in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T028 [US3] Implement raiseIntent(intent, context, target) method with handler lookup in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T029 [US3] Add auto-routing logic for single handler case in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T030 [US3] Add placeholder for multiple handler resolution (to be implemented in resolver task) in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T031 [US3] Implement findIntent(intent) method to query available handlers in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T032 [US3] Implement findIntentsByContext(context) method in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
 
 **Checkpoint**: At this point, intents should route to single handlers automatically
 
@@ -116,14 +116,14 @@ Project uses monorepo structure:
 
 **Purpose**: Expose the FDC3 DesktopAgent API to apps running in the platform
 
-- [ ] T033 [P] Create frontend FDC3 API proxy for browser environment in theia-fdc3-extensions/theia-fdc3-extension/src/browser/fdc3-frontend-proxy.ts
-- [ ] T034 [P] Create backend FDC3 API service interface in theia-fdc3-extensions/theia-fdc3-extension/src/common/fdc3-protocol.ts
-- [ ] T035 Implement RPC communication between frontend and backend for FDC3 calls in theia-fdc3-extensions/theia-fdc3-extension/src/browser/fdc3-frontend-proxy.ts
-- [ ] T036 Inject window.fdc3 object in Electron webviews in theia-fdc3-extensions/theia-fdc3-extension/src/electron-browser/fdc3-preload.ts
-- [ ] T037 Create Theia frontend module binding FDC3 services in theia-fdc3-extensions/theia-fdc3-extension/src/browser/fdc3-frontend-module.ts
-- [ ] T038 Create Theia backend module binding FDC3 services in theia-fdc3-extensions/theia-fdc3-extension/src/node/fdc3-backend-module.ts
-- [ ] T039 Implement getOrCreateChannel(channelId) method with workspace mapping in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T040 Add message origin validation for webview communications in theia-fdc3-extensions/theia-fdc3-extension/src/browser/fdc3-frontend-proxy.ts
+- [X] T033 [P] Create frontend FDC3 API proxy for browser environment in theia-fdc3-extensions/theia-fdc3-extension/src/browser/fdc3-frontend-proxy.ts
+- [X] T034 [P] Create backend FDC3 API service interface in theia-fdc3-extensions/theia-fdc3-extension/src/common/fdc3-protocol.ts
+- [X] T035 Implement RPC communication between frontend and backend for FDC3 calls in theia-fdc3-extensions/theia-fdc3-extension/src/browser/fdc3-frontend-proxy.ts
+- [X] T036 Inject window.fdc3 object in Electron webviews in theia-fdc3-extensions/theia-fdc3-extension/src/electron-browser/fdc3-preload.ts
+- [X] T037 Create Theia frontend module binding FDC3 services in theia-fdc3-extensions/theia-fdc3-extension/src/browser/fdc3-frontend-module.ts
+- [X] T038 Create Theia backend module binding FDC3 services in theia-fdc3-extensions/theia-fdc3-extension/src/node/fdc3-backend-module.ts
+- [X] T039 Implement getOrCreateChannel(channelId) method with workspace mapping in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T040 Add message origin validation for webview communications in theia-fdc3-extensions/theia-fdc3-extension/src/browser/fdc3-frontend-proxy.ts
 
 **Checkpoint**: At this point, apps can access window.fdc3 or call FDC3 APIs through extension mechanisms
 
@@ -133,13 +133,13 @@ Project uses monorepo structure:
 
 **Purpose**: Create test apps and validate the FDC3 DesktopAgent works correctly
 
-- [ ] T041 Create simple test producer extension that broadcasts contexts in theia-fdc3-extensions/fdc3-test-producer/src/extension.ts
-- [ ] T042 Create simple test consumer extension that listens for contexts in theia-fdc3-extensions/fdc3-test-consumer/src/extension.ts
-- [ ] T043 Integrate test consumer with Theia notifications to display received contexts in theia-fdc3-extensions/fdc3-test-consumer/src/extension.ts
-- [ ] T044 Update ClientPickerWidget to broadcast FDC3 client context on selection in theia-fdc3-extensions/client-picker-widget/src/browser/client-picker-widget.tsx
-- [ ] T045 Test workspace isolation with two workspaces and verify no cross-workspace context leakage
-- [ ] T046 Test context type filtering with specific and wildcard listeners
-- [ ] T047 Test intent routing with single handler auto-resolution
+- [X] T041 Create simple test producer extension that broadcasts contexts in theia-fdc3-extensions/fdc3-test-producer/src/extension.ts
+- [X] T042 Create simple test consumer extension that listens for contexts in theia-fdc3-extensions/fdc3-test-consumer/src/extension.ts
+- [X] T043 Integrate test consumer with Theia notifications to display received contexts in theia-fdc3-extensions/fdc3-test-consumer/src/extension.ts
+- [X] T044 Update ClientPickerWidget to broadcast FDC3 client context on selection in theia-fdc3-extensions/client-picker-widget/src/browser/client-picker-widget.tsx
+- [X] T045 Test workspace isolation with two workspaces and verify no cross-workspace context leakage
+- [X] T046 Test context type filtering with specific and wildcard listeners
+- [X] T047 Test intent routing with single handler auto-resolution
 
 **Checkpoint**: All core FDC3 broadcast/listen/intent functionality validated
 
@@ -149,13 +149,13 @@ Project uses monorepo structure:
 
 **Purpose**: Improvements affecting the FDC3 implementation
 
-- [ ] T048 [P] Add comprehensive JSDoc comments to FDC3 API surface in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/types/
-- [ ] T049 [P] Add error handling and user-friendly error messages for FDC3 operations in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
-- [ ] T050 [P] Implement logging for FDC3 operations (broadcast, listen, intent) in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/fdc3-logger.service.ts
-- [ ] T051 Add privacy-conscious logging filters to avoid logging sensitive context payloads in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/fdc3-logger.service.ts
-- [ ] T052 Update theia-fdc3-extension README with FDC3 usage documentation in theia-fdc3-extensions/theia-fdc3-extension/README.md
-- [ ] T053 Add FDC3 API examples to documentation in docs/fdc3-api-guide.md
-- [ ] T054 Code review and refactoring for consistency with Theia patterns
+- [X] T048 [P] Add comprehensive JSDoc comments to FDC3 API surface in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/types/
+- [X] T049 [P] Add error handling and user-friendly error messages for FDC3 operations in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/desktop-agent.service.ts
+- [X] T050 [P] Implement logging for FDC3 operations (broadcast, listen, intent) in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/fdc3-logger.service.ts
+- [X] T051 Add privacy-conscious logging filters to avoid logging sensitive context payloads in theia-fdc3-extensions/theia-fdc3-extension/src/fdc3/services/fdc3-logger.service.ts
+- [X] T052 Update theia-fdc3-extension README with FDC3 usage documentation in theia-fdc3-extensions/theia-fdc3-extension/README.md
+- [X] T053 Add FDC3 API examples to documentation in docs/fdc3-api-guide.md
+- [X] T054 Code review and refactoring for consistency with Theia patterns
 
 ---
 

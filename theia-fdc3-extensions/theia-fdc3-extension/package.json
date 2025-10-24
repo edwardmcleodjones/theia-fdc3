@@ -9,6 +9,7 @@
     "src"
   ],
   "dependencies": {
+    "@finos/fdc3": "^2.2.0",
     "@theia/core": "1.65.1"
   },
   "devDependencies": {
@@ -18,9 +19,9 @@
     "vite-plugin-lib-inject-css": "^2.2.2"
   },
   "scripts": {
-    "prepare": "yarn run clean && yarn run build",
+    "prepare": "npm run clean && npm run build",
     "clean": "rimraf lib",
-    "build": "vite build && yarn dts",
+    "build": "vite build && npm run dts",
     "watch": "vite build --watch --clearScreen false",
     "dts": "tsc --emitDeclarationOnly --declaration --outDir lib"
   },
@@ -33,6 +34,11 @@
   "theiaExtensions": [
     {
       "frontend": "lib/browser/theia-fdc3-extension-frontend-module"
+    },
+    {
+      "frontend": "lib/browser/fdc3-frontend-module",
+      "backend": "lib/node/fdc3-backend-module",
+      "electron-browser": "lib/electron-browser/fdc3-preload"
     }
   ]
 }

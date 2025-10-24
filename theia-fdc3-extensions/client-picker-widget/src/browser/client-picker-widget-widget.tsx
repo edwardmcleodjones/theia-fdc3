@@ -8,6 +8,7 @@ import {
 import { AlertMessage } from "@theia/core/lib/browser/widgets/alert-message";
 import { ReactWidget } from "@theia/core/lib/browser/widgets/react-widget";
 import type { Context, DesktopAgent } from "@finos/fdc3";
+import { getAgent } from "@finos/fdc3";
 import { OutputChannelManager } from "@theia/output/lib/browser/output-channel";
 import type { OutputChannel } from "@theia/output/lib/browser/output-channel";
 
@@ -277,19 +278,22 @@ export class ClientPickerWidgetWidget extends ReactWidget {
       },
     } satisfies Context;
 
-    const agent = (window as Window & { fdc3?: DesktopAgent }).fdc3;
-    if (!agent || typeof agent.broadcast !== "function") {
-      const message =
-        "FDC3 Desktop Agent is not available; unable to broadcast client context.";
-      this.setStatus({ variant: "warning", message });
-      this.log("warn", message);
-      return;
-    }
-
     try {
+      let agent = (window as Window & { fdc3?: DesktopAgent }).fdc3;
+      if (!agent || typeof agent.broadcast !== "function") {
+        agent = await getAgent().catch(() => undefined);
+      }
+      if (!agent) {
+        const message =
+          "FDC3 Desktop Agent is not available; unable to broadcast client context.";
+        this.setStatus({ variant: "warning", message });
+        this.log("warn", message);
+        return;
+      }
+
       await agent.broadcast(context);
       const message = `Broadcasted client context for ${client.name} (${client.clientId}).`;
-      this.setStatus({ variant: "success", message });
+      // this.setStatus({ variant: "success", message });
       this.log("info", message);
     } catch (error) {
       const message = `Failed to broadcast context for ${client.name}.`;
